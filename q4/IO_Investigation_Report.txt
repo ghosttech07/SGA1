@@ -1,0 +1,10 @@
+Key actions and findings:
+- Created `app.log` containing a sample line.
+- Used `lsof` to list open files; after opening `app.log` on fd 3, `lsof -p $$` showed bash had fd `3r` -> `/workspaces/SGA1/q4/app.log`.
+- `/proc/$$/fd` shows a symlink `3 -> /workspaces/SGA1/q4/app.log` while the descriptor was open.
+- Redirected outputs: `ls -l > stdout.txt`, `ls /not_a_real_path 2> stderr.txt`, and combined redirection `(ls -l && ls /not_a_real_path) > combined.txt 2>&1` created expected files.
+- `ulimit -a` displayed resource limits (open files -n is 524288, etc.).
+
+Observations:
+- File descriptors are visible under `/proc/<pid>/fd` and `lsof` shows which process holds which descriptor.
+- Redirection and separate/error combination behaviors match expectations.

@@ -1,0 +1,23 @@
+Storage devices (excerpted):
+- loop devices: loop0..loop5 (various loop mounts used by containers and workspace)
+- sda (30G) with sda1 mounted on /workspaces/.codespaces/shared and related mounts
+- sdb (45G) with sdb1 mounted on /tmp
+- sdc (512G) with sdc1 present
+
+Mounts (excerpt): overlay on /, proc on /proc, tmpfs on /dev, /dev/root on /vscode, /dev/sdb1 on /tmp
+
+Disk usage (df -h excerpt):
+- overlay: 32G total, 9.6G used, 21G available (33% used)
+- /dev/root: 29G total, 24G used, 5.7G available (81% used)
+- /dev/sdb1: 44G total, 2.4G used, 40G available (6% used)
+
+Inode usage (df -i excerpt):
+- overlay IUse% 10%
+- /dev/root IUse% 7%
+- /dev/sdb1 IUse% 1%
+
+Storage health observations and recommendations:
+- Root overlay and /vscode show significant usage; consider cleaning unused images, containers and workspace artifacts.
+- Monitor `/dev/root` (81% used) and reclaim space if needed before deploying new services.
+- Ensure regular log rotation for files under `/workspaces` and `/var/lib/docker` to avoid sudden disk exhaustion.
+

@@ -1,0 +1,12 @@
+Username: codespace
+Groups: codespace pipx python oryx golang docker sdkman rvm php conda nvs nvm hugo ssh
+Shell: /bin/bash
+Current working directory: /
+Workspace listing (partial):
+See provided screenshots / logs for full `ls -ls` output (root listing shown in lab screenshots).
+Network check: youtube.com reachable
+
+Observations:
+- Verified user identity and group membership.
+- Confirmed interactive shell is `/bin/bash`.
+- Confirmed working directory is `/` and network connectivity to youtube.com is available.

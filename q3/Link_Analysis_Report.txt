@@ -1,0 +1,11 @@
+Commands and key outputs (excerpted from session):
+- Created `original.txt` with content "Linux link test file".
+- `ln original.txt hardlink.txt` created a hard link; `ln -s original.txt symlink.txt` created a symlink.
+- `ls -li` showed `original.txt` and `hardlink.txt` share inode `1310805` and `symlink.txt` has inode `1310806`.
+- `stat` output: `original.txt` and `hardlink.txt` both show Inode: 1310805 Links: 2. `symlink.txt` is a symbolic link pointing to `original.txt`.
+- After `rm original.txt`: `hardlink.txt` remained and preserved file contents; `symlink.txt` became broken and `cat` reported `No such file or directory`.
+
+Conclusions:
+- Hard links point to the same inode; deleting the original name does not remove data while at least one hard link exists.
+- Symbolic links point to pathname; deleting the target breaks the symlink.
+- Inode numbers and link counts (the `Links:` field) confirm hard link sharing.
